@@ -189,7 +189,7 @@ class TLDetector(object):
                 closest_light = light
                 line_wp_idx = temp_wp_idx
                     
-        rospy.loginfo('diff: %d', diff)
+        rospy.loginfo('Distance: %d', diff)
         if closest_light and diff < 100: 
             state = self.get_light_state(closest_light)
             return line_wp_idx, state
