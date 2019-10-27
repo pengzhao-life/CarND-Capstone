@@ -1,6 +1,43 @@
+##Individual submission
+This is individual submission by:
+* Peng Zhao (pengzhao0524@gmail.com)
+
 This is the project repo for the final project of the Udacity Self-Driving Car Nanodegree: Programming a Real Self-Driving Car. For more information about the project, see the project introduction [here](https://classroom.udacity.com/nanodegrees/nd013/parts/6047fe34-d93c-4f50-8336-b70ef10cb4b2/modules/e1a23b06-329a-4684-a717-ad476f0d8dff/lessons/462c933d-9f24-42d3-8bdc-a08a5fc866e4/concepts/5ab4b122-83e6-436d-850f-9f4d26627fd9).
 
-Please use **one** of the two installation options, either native **or** docker installation.
+[![Self Driving Car](https://img.youtube.com/vi/Z93ogIiEtDQ/0.jpg)](https://youtu.be/Z93ogIiEtDQ)
+
+[image1]: ./imgs/system.png "system diagram"
+
+## System Architecture 
+This system uses ROS, where messages are exchanged in the way of subscribing and publishing. 
+There are mainly three parts:
+* `Waypoint Updater Node` update the target velocity property of each waypoint based on traffic light and obstacle detection data.
+* `Waypoint Follower Node` controls throttle, brake, and steering.
+* `Traffic Light Detection Node' processes images, detect the traffic light in the image, and decide whether it is red light or not, 
+and then publish this information to `Waypoint Updater Node`.
+
+![alt text][image1]
+
+## Implementation
+The code for `Waypoint Updater Node` and `Waypoint Follower Node` are mainly from the course walkthrough.
+
+For the traffic light detection, a pre-trained model `ssd_mobilenet_v1_coco` from [TensorFlow Model Zoo](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/detection_model_zoo.md) was used.
+It works well for the simulator test as the videocast in youtube as above.
+
+To speed up, the detection was applied only when the stop line is within close distance (i.e. 100 meters). In addition, every 3 images were skipped, and only the every 4th image was used to detection.
+
+After the traffic light was detected, the average color value inside the detected region in each channel of R, G, and B was calculated. 
+Then the distance between this color (r, g, b) and Red(255,0,0), Yellow(255,255,0), and Green(0,255,0) was computed respectively. 
+It is considered as Red if the least distance is between it and (255,0,0).
+
+
+
+## Installation
+There are two options for installation as below. 
+I used the first one. My computer specs:
+* Host computer: Ubuntu 16.04
+* GPU: GeForce GTX 1050 Ti
+* Virtual Machine: VirturalBox 5.2
 
 ### Native Installation
 
