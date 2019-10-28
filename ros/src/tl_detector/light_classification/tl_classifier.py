@@ -8,7 +8,6 @@ import math
 class TLClassifier(object):
     def __init__(self):
         #TODO load classifier
-        #self.MODEL_NAME = 'ssdlite_mobilenet_v2_coco_2018_05_09'
         self.MODEL_NAME = 'ssd_mobilenet_v1_coco_2017_11_17'
         model_file = self.MODEL_NAME + '/frozen_inference_graph.pb'
 
