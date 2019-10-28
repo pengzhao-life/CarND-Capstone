@@ -22,7 +22,7 @@ and then publish this information to `Waypoint Updater Node`.
 The code for `Waypoint Updater Node` and `Waypoint Follower Node` are mainly from the course walkthrough.
 
 For the traffic light detection, a pre-trained model `ssd_mobilenet_v1_coco` from [TensorFlow Model Zoo](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/detection_model_zoo.md) was used.
-It works well for the simulator test as the videocast in youtube as above.
+It works well for the simulator test as the video above.
 
 To speed up, the detection was applied only when the stop line is within close distance (i.e. 100 meters). In addition, every 3 images were skipped, and only the every 4th image was used to detection.
 
@@ -30,7 +30,10 @@ After the traffic light was detected, the average color value inside the detecte
 Then the distance between this color (r, g, b) and Red(255,0,0), Yellow(255,255,0), and Green(0,255,0) was computed respectively. 
 It is considered as Red if the least distance is between it and (255,0,0).
 
-
+It has some problems when running with real world images. For future work, there are some improvements can be done:
+* re-train model with new images
+* add image preprocessing and augmentation
+* try different models
 
 ## Installation
 There are two options for installation as below. 
